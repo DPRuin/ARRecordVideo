@@ -35,6 +35,7 @@
 		7E20074A2057BE3F00999227 /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2007342057BE3F00999227 /* ARView.swift */; };
 		7E20074B2057BE3F00999227 /* RecordAR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2007352057BE3F00999227 /* RecordAR.swift */; };
 		7E20074C2057BE3F00999227 /* ViewAR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2007362057BE3F00999227 /* ViewAR.swift */; };
+		7EFE6162206B8B8900EF0BBB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE6161206B8B8900EF0BBB /* Player.swift */; };
 		7EFF4EEE2058CBC20002DE11 /* SquishButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF4EED2058CBC20002DE11 /* SquishButton.swift */; };
 		7EFF4EF72058D2E40002DE11 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF4EF02058D2E40002DE11 /* Constants.swift */; };
 		7EFF4EF82058D2E40002DE11 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF4EF12058D2E40002DE11 /* Protocols.swift */; };
@@ -89,6 +90,8 @@
 		7E2007342057BE3F00999227 /* ARView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
 		7E2007352057BE3F00999227 /* RecordAR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAR.swift; sourceTree = "<group>"; };
 		7E2007362057BE3F00999227 /* ViewAR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAR.swift; sourceTree = "<group>"; };
+		7EFE6160206B8B8900EF0BBB /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		7EFE6161206B8B8900EF0BBB /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		7EFF4EED2058CBC20002DE11 /* SquishButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquishButton.swift; sourceTree = "<group>"; };
 		7EFF4EF02058D2E40002DE11 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7EFF4EF12058D2E40002DE11 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -128,6 +131,7 @@
 		7E2006C52057AED000999227 /* ARRecordVideo */ = {
 			isa = PBXGroup;
 			children = (
+				7EFE615F206B8B8900EF0BBB /* Player */,
 				7EFF4EEF2058D2E40002DE11 /* SegmentedControl */,
 				7E2007162057BE3F00999227 /* ARVideoKit */,
 				7E2006C62057AED000999227 /* AppDelegate.swift */,
@@ -244,6 +248,15 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		7EFE615F206B8B8900EF0BBB /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				7EFE6160206B8B8900EF0BBB /* Player.h */,
+				7EFE6161206B8B8900EF0BBB /* Player.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
 		7EFF4EEF2058D2E40002DE11 /* SegmentedControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +360,7 @@
 				7E20073B2057BE3F00999227 /* RecordAR+PhotoRender.swift in Sources */,
 				7E2006CB2057AED000999227 /* ViewController.swift in Sources */,
 				7E2007482057BE3F00999227 /* RenderAR.swift in Sources */,
+				7EFE6162206B8B8900EF0BBB /* Player.swift in Sources */,
 				7E2007392057BE3F00999227 /* ARVideoOptions.swift in Sources */,
 				7E2007402057BE3F00999227 /* RecordARDelegate.swift in Sources */,
 				7EFF4EF72058D2E40002DE11 /* Constants.swift in Sources */,

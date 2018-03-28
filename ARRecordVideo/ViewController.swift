@@ -21,6 +21,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
     @IBOutlet weak var segmentedControl: SegmentedControl!
     @IBOutlet weak var squishBtn: SquishButton!
     
+    @IBOutlet weak var imageView: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -192,6 +195,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
             }else if recorder?.status == .recording {
                 sender.setTitle("录制", for: .normal)
                 recorder?.stop() { path in
+                    
                     self.recorder?.export(video: path) { saved, status in
                         DispatchQueue.main.sync {
                             self.exportMessage(success: saved, status: status)
@@ -241,6 +245,7 @@ extension ViewController {
     func recorder(didEndRecording path: URL, with noError: Bool) {
         if noError {
             // Do something with the video path.
+            print("---", path)
         }
     }
     
