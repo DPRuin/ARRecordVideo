@@ -20,9 +20,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
 
     @IBOutlet weak var segmentedControl: SegmentedControl!
     @IBOutlet weak var squishBtn: SquishButton!
-    
     @IBOutlet weak var imageView: UIImageView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,27 +39,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
         
         sceneView.scene.rootNode.scale = SCNVector3(0.1, 0.1, 0.1)
         
-        // Initialize ARVideoKit recorder
-        recorder = RecordAR(ARSceneKit: sceneView)
-        
-        /*----👇---- ARVideoKit Configuration ----👇----*/
-        
-        // Set the recorder's delegate
-        recorder?.delegate = self
-        
-        // Set the renderer's delegate
-        recorder?.renderAR = self
-        
-        // Configure the renderer to perform additional image & video processing 👁
-        recorder?.onlyRenderWhileRecording = false
-        
-        // Configure ARKit content mode. Default is .auto
-        recorder?.contentMode = .aspectFill
-        
-        // Set the UIViewController orientations
-        recorder?.inputViewOrientations = [.landscapeLeft, .landscapeRight, .portrait]
-        // Configure RecordAR to store media files in local app directory
-        recorder?.deleteCacheWhenExported = false
+        // 录制
+        setUpRecordVideo()
         
         // configureNavigationBelowSegmentedControl()
         configureSegmentedControl()
@@ -105,6 +84,31 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
     // MARK: - Hide Status Bar
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    // MARK: - 初始化
+    func setUpRecordVideo() {
+        // Initialize ARVideoKit recorder
+        recorder = RecordAR(ARSceneKit: sceneView)
+        
+        /*----👇---- ARVideoKit Configuration ----👇----*/
+        
+        // Set the recorder's delegate
+        recorder?.delegate = self
+        
+        // Set the renderer's delegate
+        recorder?.renderAR = self
+        
+        // Configure the renderer to perform additional image & video processing 👁
+        recorder?.onlyRenderWhileRecording = false
+        
+        // Configure ARKit content mode. Default is .auto
+        recorder?.contentMode = .aspectFill
+        
+        // Set the UIViewController orientations
+        recorder?.inputViewOrientations = [.landscapeLeft, .landscapeRight, .portrait]
+        // Configure RecordAR to store media files in local app directory
+        recorder?.deleteCacheWhenExported = false
     }
     
     // MARK: - SegmentedControl
