@@ -198,14 +198,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
                 }
             }else if recorder?.status == .recording {
                 sender.setTitle("录制", for: .normal)
-                recorder?.stop() { path in
+                recorder?.stop({ (url) in
+                    // 预览视频
                     
-                    self.recorder?.export(video: path) { saved, status in
-                        DispatchQueue.main.sync {
-                            self.exportMessage(success: saved, status: status)
-                        }
-                    }
-                }
+                })
+                
+                
+//                recorder?.stop() { path in
+//
+//
+//                    self.recorder?.export(video: path) { saved, status in
+//                        DispatchQueue.main.sync {
+//                            self.exportMessage(success: saved, status: status)
+//                        }
+//                    }
+//                }
             }
         }
 
@@ -240,7 +247,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
 //    }
 }
 
-//MARK: - ARVideoKit Delegate Methods
+// MARK: - ARVideoKit Delegate Methods
+
 extension ViewController {
     func frame(didRender buffer: CVPixelBuffer, with time: CMTime, using rawBuffer: CVPixelBuffer) {
         // Do some image/video processing.
@@ -264,6 +272,8 @@ extension ViewController {
         }
     }
 }
+
+// MARK: - SegmentedControlDelegate
 
 extension ViewController: SegmentedControlDelegate {
     func segmentedControl(_ segmentedControl: SegmentedControl, didSelectIndex selectedIndex: Int) {
