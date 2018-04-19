@@ -34,6 +34,7 @@
 		7E4183502079C28C0052DB98 /* video.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E4183392079C28C0052DB98 /* video.scnassets */; };
 		7E4183512079C28C0052DB98 /* RenderARDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E41833B2079C28C0052DB98 /* RenderARDelegate.swift */; };
 		7E4183522079C28C0052DB98 /* RecordARDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E41833C2079C28C0052DB98 /* RecordARDelegate.swift */; };
+		7ECC49692088ADD100AD40CC /* DPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECC49682088ADD100AD40CC /* DPlayer.swift */; };
 		7EFE6162206B8B8900EF0BBB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE6161206B8B8900EF0BBB /* Player.swift */; };
 		7EFF4EEE2058CBC20002DE11 /* SquishButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF4EED2058CBC20002DE11 /* SquishButton.swift */; };
 		7EFF4EF72058D2E40002DE11 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF4EF02058D2E40002DE11 /* Constants.swift */; };
@@ -88,6 +89,7 @@
 		7E4183392079C28C0052DB98 /* video.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = video.scnassets; sourceTree = "<group>"; };
 		7E41833B2079C28C0052DB98 /* RenderARDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderARDelegate.swift; sourceTree = "<group>"; };
 		7E41833C2079C28C0052DB98 /* RecordARDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordARDelegate.swift; sourceTree = "<group>"; };
+		7ECC49682088ADD100AD40CC /* DPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPlayer.swift; sourceTree = "<group>"; };
 		7EFE6160206B8B8900EF0BBB /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		7EFE6161206B8B8900EF0BBB /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		7EFF4EED2058CBC20002DE11 /* SquishButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquishButton.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				7E2006C82057AED000999227 /* art.scnassets */,
 				7E2006CA2057AED000999227 /* ViewController.swift */,
 				7EFF4EED2058CBC20002DE11 /* SquishButton.swift */,
+				7ECC49682088ADD100AD40CC /* DPlayer.swift */,
 				7E2006CC2057AED000999227 /* Main.storyboard */,
 				7E2006CF2057AED000999227 /* Assets.xcassets */,
 				7E2006D12057AED000999227 /* LaunchScreen.storyboard */,
@@ -353,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E41834D2079C28C0052DB98 /* WritAR.swift in Sources */,
+				7ECC49692088ADD100AD40CC /* DPlayer.swift in Sources */,
 				7E4183452079C28C0052DB98 /* RecordAR.swift in Sources */,
 				7E4183522079C28C0052DB98 /* RecordARDelegate.swift in Sources */,
 				7E4183442079C28C0052DB98 /* UIView+isType.swift in Sources */,
