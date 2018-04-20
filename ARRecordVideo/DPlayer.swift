@@ -14,6 +14,7 @@ class DPlayer: UIView {
     open var videoUrl: URL! {
         didSet {
             removeAvPlayerNotificationObserver()
+            nextPlayer()
         }
     }
     private var player: AVPlayer!
@@ -24,6 +25,7 @@ class DPlayer: UIView {
         
         let playerItem = AVPlayerItem(url: url)
         player = AVPlayer(playerItem: playerItem)
+        addAVPlayerNotificationObserver(playerItem: player.currentItem!)
         //创建播放器层
         let playerLayer = AVPlayerLayer(player: player)
         

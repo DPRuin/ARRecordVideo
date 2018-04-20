@@ -20,10 +20,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
 
     @IBOutlet weak var segmentedControl: SegmentedControl!
     @IBOutlet weak var squishBtn: SquishButton!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var bgView: UIImageView!
+    
+    @IBOutlet weak var btnAfresh: UIButton!
+    
+    @IBOutlet weak var btnEnsure: UIButton!
+    
+    var player: DPlayer?
+    
+    private var nowVedioUrl: URL!
+    private var isVedio: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.btnAfresh.isHidden = true
+        self.btnEnsure.isHidden = true
         
         // Set the view's delegate
         sceneView.delegate = self
@@ -200,6 +212,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
                 sender.setTitle("录制", for: .normal)
                 recorder?.stop({ (url) in
                     // 预览视频
+                    self.showBtn()
+                    if let player = self.player {
+                        player.videoUrl = url
+                        player.isHidden = false
+                    } else {
+                        DispatchQueue.main.sync {
+                            self.player = DPlayer(frame: self.bgView.bounds, withShowIn: self.bgView, url: url)
+                        }
+                        
+                    }
                     
                 })
                 
@@ -219,7 +241,39 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
         
     }
     
+    @IBAction func btnAfreshDidClick(_ sender: UIButton) {
+        // 重新拍照或录制
+        player?.stopPlayer()
+        player?.isHidden = true
 
+        hideBtn()
+    }
+    
+    @IBAction func btnEnsureDidClick(_ sender: UIButton) {
+        // 保存相册
+        recorder?.export(video: nowVedioUrl, { (saved, status) in
+            DispatchQueue.main.sync {
+                self.exportMessage(success: saved, status: status)
+            }
+        })
+        
+        hideBtn()
+    }
+    
+    func showBtn() {
+        DispatchQueue.main.sync {
+            self.btnEnsure.isHidden = false
+            self.btnAfresh.isHidden = false
+        }
+    }
+    
+    func hideBtn() {
+        DispatchQueue.main.sync {
+            self.btnEnsure.isHidden = true
+            self.btnAfresh.isHidden = true
+        }
+    }
+    
     // MARK: - ARSCNViewDelegate
     
 /*
@@ -288,9 +342,10 @@ extension ViewController: SegmentedControlDelegate {
         switch selectedIndex {
         case 0: //
             squishBtn.type = ButtonType.camera
+            isVedio = false
         case 1:
             squishBtn.type = ButtonType.video
-            
+            isVedio = true
         default:
             print("hhhhh")
         }
