@@ -14,12 +14,22 @@ class DPlayer: UIView {
     open var videoUrl: URL?
     private var player: AVPlayer!
     
-    init(frame: CGRect, withShowIn bgView: UIView, url: URL) {
-        let playerLayer = AVPlayerLayer(player: self.player)
-    }
+//    init(frame: CGRect, withShowIn bgView: UIView, url: URL) {
+//        let playerLayer = AVPlayerLayer(player: self.player)
+//        //创建播放器层
+//        let playerLayer = AVPlayerLayer(player: player)
+//        playerLayer.frame = bounds
+//        layer.addSublayer(playerLayer)
+//        if url {
+//            videoUrl = url
+//        }
+//        bgView.addSubview(self)
+//    }
+//
+//    public func stop() {
+//
+//    }
     
-
-    public func stop() {
-        
-    }
+    
+    
 }
