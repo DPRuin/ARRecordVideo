@@ -26,16 +26,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
     
     @IBOutlet weak var btnEnsure: UIButton!
     
-    var player: DPlayer?
+    // var player: DPlayer?
     
     private var nowVedioUrl: URL!
     private var isVedio: Bool!
     
+    fileprivate var player = Player()
+    
+    deinit {
+        self.player.willMove(toParentViewController: self)
+        self.player.view.removeFromSuperview()
+        self.player.removeFromParentViewController()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.btnAfresh.isHidden = true
-        self.btnEnsure.isHidden = true
+        setupPlayer()
         
         // Set the view's delegate
         sceneView.delegate = self
@@ -57,6 +63,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
         // configureNavigationBelowSegmentedControl()
         configureSegmentedControl()
     }
+    
+    func setupPlayer() {
+        self.player.view.frame = self.view.bounds
+        self.addChildViewController(self.player)
+        self.view.addSubview(self.player.view)
+        self.player.didMove(toParentViewController: self)
+        
+        self.player.playbackLoops = true
+        
+        let cancelBtn = UIButton(type: .custom)
+        cancelBtn.setImage(UIImage(named: "btn_cancel"), for: UIControlState.normal)
+        cancelBtn.addTarget(self, action: #selector(self.btnAfreshDidClick(_:)), for: .touchUpInside)
+        cancelBtn.frame = CGRect(x: 100, y: 100, width: 44, height: 44)
+        self.player.view.addSubview(cancelBtn)
+    }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -213,15 +236,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
                 recorder?.stop({ (url) in
                     // 预览视频
                     self.showBtn()
-                    if let player = self.player {
-                        player.videoUrl = url
-                        player.isHidden = false
-                    } else {
-                        DispatchQueue.main.sync {
-                            self.player = DPlayer(frame: self.bgView.bounds, withShowIn: self.bgView, url: url)
-                        }
-                        
-                    }
+                    
+                    self.player.url = url
+                    self.player.playFromBeginning()
                     
                 })
                 
@@ -243,10 +260,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
     
     @IBAction func btnAfreshDidClick(_ sender: UIButton) {
         // 重新拍照或录制
-        player?.stopPlayer()
-        player?.isHidden = true
+//        player?.stopPlayer()
+//        player?.isHidden = true
 
-        hideBtn()
+        self.player.willMove(toParentViewController: self)
+        self.player.view.removeFromSuperview()
+        self.player.removeFromParentViewController()
     }
     
     @IBAction func btnEnsureDidClick(_ sender: UIButton) {
