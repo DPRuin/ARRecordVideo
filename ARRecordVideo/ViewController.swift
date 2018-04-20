@@ -28,10 +28,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
     
     // var player: DPlayer?
     
+    private var nowImage: UIImage!
     private var nowVedioUrl: URL!
     private var isVedio: Bool!
     
     fileprivate var player = Player()
+    private weak var bgImageView: UIImageView!
     
     deinit {
         self.player.willMove(toParentViewController: self)
@@ -43,16 +45,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
         super.viewDidLoad()
         setupPlayer()
         
-        // Set the view's delegate
         sceneView.delegate = self
-        
-        // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
-        
-        // Create a new scene
+
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
-        // Set the scene to the view
         sceneView.scene = scene
         
         sceneView.scene.rootNode.scale = SCNVector3(0.1, 0.1, 0.1)
@@ -72,11 +68,28 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
         
         self.player.playbackLoops = true
         
+        let bgImageView = UIImageView(frame: self.view.bounds)
+        bgImageView.isHidden = true
+        self.bgImageView = bgImageView
+        
+        self.player.view.addSubview(bgImageView)
+        
         let cancelBtn = UIButton(type: .custom)
         cancelBtn.setImage(UIImage(named: "btn_cancel"), for: UIControlState.normal)
         cancelBtn.addTarget(self, action: #selector(self.btnAfreshDidClick(_:)), for: .touchUpInside)
-        cancelBtn.frame = CGRect(x: 100, y: 100, width: 44, height: 44)
+
+        let insert:CGFloat = 50.0
+        let y = self.view.bounds.height - 44/2 - insert
+        cancelBtn.frame = CGRect(x: insert, y: y, width: 44, height: 44)
         self.player.view.addSubview(cancelBtn)
+        
+        let confirmBtn = UIButton(type: .custom)
+        confirmBtn.setImage(UIImage(named: "btn_confirm"), for: UIControlState.normal)
+        confirmBtn.addTarget(self, action: #selector(self.btnEnsureDidClick(_:)), for: .touchUpInside)
+        
+        let x = self.view.bounds.width - 44/2 - insert
+        confirmBtn.frame = CGRect(x: x, y: y, width: 44, height: 44)
+        self.player.view.addSubview(confirmBtn)
     }
     
     
@@ -215,15 +228,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
     @IBAction func recordVideo(_ sender: SquishButton) {
 
         if sender.type == ButtonType.camera {
+            isVedio = false
             
-            let image = self.recorder?.photo()
-            self.recorder?.export(UIImage: image) { saved, status in
-                if saved {
-                    // Inform user photo has exported successfully
-                    self.exportMessage(success: saved, status: status)
-                }
-            }
+            nowImage = self.recorder?.photo()
+            self.player.url = Bundle.main.url(forResource: "a", withExtension: "mp4")
+            self.player.playFromBeginning()
+            self.player.pause()
+            bgImageView.isHidden = false
+            bgImageView.image = nowImage
+            
         } else if sender.type == ButtonType.video {
+            isVedio = true
             //Record
             if recorder?.status == .readyToRecord {
                 sender.setTitle("停止", for: .normal)
@@ -234,49 +249,44 @@ class ViewController: UIViewController, ARSCNViewDelegate, RecordARDelegate, Ren
             }else if recorder?.status == .recording {
                 sender.setTitle("录制", for: .normal)
                 recorder?.stop({ (url) in
-                    // 预览视频
-                    self.showBtn()
+                    DispatchQueue.main.async {
+                        self.bgImageView.isHidden = true
+                    }
                     
+                    self.nowVedioUrl = url
                     self.player.url = url
                     self.player.playFromBeginning()
-                    
                 })
-                
-                
-//                recorder?.stop() { path in
-//
-//
-//                    self.recorder?.export(video: path) { saved, status in
-//                        DispatchQueue.main.sync {
-//                            self.exportMessage(success: saved, status: status)
-//                        }
-//                    }
-//                }
             }
         }
 
         
     }
     
-    @IBAction func btnAfreshDidClick(_ sender: UIButton) {
-        // 重新拍照或录制
-//        player?.stopPlayer()
-//        player?.isHidden = true
-
-        self.player.willMove(toParentViewController: self)
-        self.player.view.removeFromSuperview()
-        self.player.removeFromParentViewController()
+    @objc func btnAfreshDidClick(_ sender: UIButton) {
+        self.player.pause()
+        self.player.view.isHidden = true
     }
     
-    @IBAction func btnEnsureDidClick(_ sender: UIButton) {
-        // 保存相册
-        recorder?.export(video: nowVedioUrl, { (saved, status) in
-            DispatchQueue.main.sync {
-                self.exportMessage(success: saved, status: status)
+    @objc func btnEnsureDidClick(_ sender: UIButton) {
+        if isVedio {
+            recorder?.export(video: nowVedioUrl, { (saved, status) in
+                DispatchQueue.main.sync {
+                    self.exportMessage(success: saved, status: status)
+                }
+            })
+            
+        } else {
+            self.recorder?.export(UIImage: nowImage) { saved, status in
+                if saved {
+                    self.exportMessage(success: saved, status: status)
+                }
             }
-        })
+        }
         
-        hideBtn()
+        self.player.pause()
+        self.player.view.isHidden = true
+
     }
     
     func showBtn() {
@@ -361,10 +371,8 @@ extension ViewController: SegmentedControlDelegate {
         switch selectedIndex {
         case 0: //
             squishBtn.type = ButtonType.camera
-            isVedio = false
         case 1:
             squishBtn.type = ButtonType.video
-            isVedio = true
         default:
             print("hhhhh")
         }

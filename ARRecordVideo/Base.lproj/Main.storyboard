@@ -17,9 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Apt-E0-pX2" userLabel="bgView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                            </imageView>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rMa-wz-hWt">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </arscnView>
@@ -42,44 +39,21 @@
                                     <constraint firstAttribute="height" constant="30" id="KsS-R4-vpG"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H80-eE-c0F">
-                                <rect key="frame" x="44" y="522" width="70" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="btn_cancel"/>
-                                <connections>
-                                    <action selector="btnAfreshDidClick:" destination="BV1-FR-VrT" eventType="touchUpInside" id="LTf-CA-PtS"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LcH-gb-91f">
-                                <rect key="frame" x="271" y="522" width="70" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="btn_confirm"/>
-                                <connections>
-                                    <action selector="btnEnsureDidClick:" destination="BV1-FR-VrT" eventType="touchUpInside" id="fXm-ba-DG9"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="EiJ-Rl-LdT" firstAttribute="centerX" secondItem="QS9-A6-q0u" secondAttribute="centerX" id="6mp-AR-ElA"/>
                             <constraint firstItem="rMa-wz-hWt" firstAttribute="leading" secondItem="y1g-EP-Zea" secondAttribute="leading" id="Brg-1x-GEp"/>
-                            <constraint firstItem="Apt-E0-pX2" firstAttribute="top" secondItem="y1g-EP-Zea" secondAttribute="top" id="IOq-QX-llq"/>
                             <constraint firstItem="y1g-EP-Zea" firstAttribute="bottom" secondItem="rMa-wz-hWt" secondAttribute="bottom" id="O1G-HX-Bwf"/>
-                            <constraint firstItem="Apt-E0-pX2" firstAttribute="leading" secondItem="y1g-EP-Zea" secondAttribute="leading" id="QH6-DN-AjN"/>
                             <constraint firstItem="y1g-EP-Zea" firstAttribute="trailing" secondItem="rMa-wz-hWt" secondAttribute="trailing" id="R3x-d4-VWK"/>
                             <constraint firstItem="y1g-EP-Zea" firstAttribute="bottom" secondItem="EiJ-Rl-LdT" secondAttribute="bottom" constant="40" id="Thv-3I-0ii"/>
                             <constraint firstItem="Xm1-k1-iO5" firstAttribute="centerX" secondItem="QS9-A6-q0u" secondAttribute="centerX" id="YcV-JI-mQq"/>
-                            <constraint firstItem="y1g-EP-Zea" firstAttribute="trailing" secondItem="Apt-E0-pX2" secondAttribute="trailing" id="fWq-kQ-tZN"/>
                             <constraint firstItem="EiJ-Rl-LdT" firstAttribute="top" secondItem="Xm1-k1-iO5" secondAttribute="bottom" constant="10" id="koG-dd-fCw"/>
                             <constraint firstItem="rMa-wz-hWt" firstAttribute="top" secondItem="y1g-EP-Zea" secondAttribute="top" id="olA-xW-cyt"/>
-                            <constraint firstItem="Apt-E0-pX2" firstAttribute="bottom" secondItem="y1g-EP-Zea" secondAttribute="bottom" id="rGn-Ky-jCk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="y1g-EP-Zea"/>
                     </view>
                     <connections>
-                        <outlet property="bgView" destination="Apt-E0-pX2" id="WPC-d9-gOm"/>
-                        <outlet property="btnAfresh" destination="H80-eE-c0F" id="c6Z-ni-pSx"/>
-                        <outlet property="btnEnsure" destination="LcH-gb-91f" id="axz-of-wXl"/>
                         <outlet property="sceneView" destination="rMa-wz-hWt" id="1dR-ti-StG"/>
                         <outlet property="segmentedControl" destination="EiJ-Rl-LdT" id="Hje-Lr-d3d"/>
                         <outlet property="squishBtn" destination="Xm1-k1-iO5" id="YQ2-Oy-lJ3"/>
@@ -90,8 +64,4 @@
             <point key="canvasLocation" x="-618" y="29"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="btn_cancel" width="70" height="70"/>
-        <image name="btn_confirm" width="70" height="70"/>
-    </resources>
 </document>
